@@ -1,0 +1,75 @@
+#/bin/bash
+
+set -eo pipefail
+set -x
+
+mkdir -p /opt/app-root/etc
+mv /tmp/src/jupyter_notebook_config.py /opt/app-root/etc/
+ln -s /mnt/user/drive /opt/app-root/src/drive
+
+# Execute original assemble script.
+/usr/libexec/s2i/assemble
+
+# install tvb since it needs to be installed after Cython
+pip install -r /opt/app-root/src/requirements.tvb.txt
+rm -f /opt/app-root/src/requirements.tvb.txt /opt/app-root/src/requirements.txt
+
+# Activate ipywidgets and nglviewextension
+jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
+        jupyter nbextension enable --py nglview --sys-prefix
+
+# Also activate ipywidgets/bokeh extension for JupyterLab.
+jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 \
+                             jupyterlab_bokeh@1.0.0 \
+                             @krassowski/jupyterlab_go_to_definition \
+                             jupyterlab-topbar-extension \
+                             jupyterlab-system-monitor
+
+
+jupyter lab build
+
+# Install libneurosim as a dependency of nest and nest
+
+# Import matplotlib the first time to build the font cache.
+MPLBACKEND=Agg python -c "import matplotlib.pyplot"
+
+NEUROSIM_COMMIT=03646747c8fe64fa3439ac2d282623b659f60c22
+NEST_VERSION=2.18.0
+NEURON_VERSION=7.6
+
+cd /tmp
+wget -q -O libneurosim.zip   https://github.com/INCF/libneurosim/archive/${NEUROSIM_COMMIT}.zip
+unzip libneurosim.zip
+cd libneurosim-${NEUROSIM_COMMIT}/
+./autogen.sh
+./configure --prefix=$HOME/.local
+make install
+
+cd ..
+wget -q -O nest.tar.gz https://github.com/nest/nest-simulator/archive/v${NEST_VERSION}.tar.gz
+tar xzf nest.tar.gz
+cd nest-simulator-${NEST_VERSION}/
+cmake3 -DCMAKE_INSTALL_PREFIX:PATH=$HOME/.local \
+      -Dwith-libneurosim=$HOME/.local -Dwith-python=3 \
+      .
+make install
+
+cd /tmp
+wget -q -O /tmp/nrn.tar.gz https://neuron.yale.edu/ftp/neuron/versions/v7.6/7.6.2/nrn-7.6.2.tar.gz
+tar -xvzf nrn.tar.gz
+
+cd nrn-${NEURON_VERSION}
+CC=/usr/lib64/mpich/bin/mpicc ./configure \
+                              --without-iv \
+                              --with-paranrn=dynamic \
+                              --with-readline=yes \
+                              --with-nrnpython=dynamic \
+                              --prefix=$HOME/.local/nrn-7.6
+make -j install
+
+cd /tmp
+rm -rf /tmp/libneurosim* /tmp/nest* /tmp/src
+
+
+# Fix up permissions.
+fix-permissions /opt/app-root

@@ -1,0 +1,7 @@
+#!/bin/bash
+set -eo pipefail
+set -x
+
+source /opt/app-root/etc/generate_container_user
+
+exec jupyter labhub --NotebookApp.default_url=/lab --config=/opt/app-root/etc/jupyter_notebook_config.py $@
