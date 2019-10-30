@@ -67,9 +67,15 @@ CC=/usr/lib64/mpich/bin/mpicc ./configure \
                               --prefix=$HOME/.local/nrn-7.6
 make -j install
 
+wget -q -O /tmp/sda_flex.tar.gz https://github.com/HumanBrainProject/clb-jupyter-images/raw/external/external/sda_flex-7.2.3.tar.gz
 cd /tmp
-rm -rf /tmp/libneurosim* /tmp/nest* /tmp/src
+tar xzf /tmp/sda_flex.tar.gz
+cd sda_flex-7.2.3/src
+make
+cd /tmp/
+mv sda_flex-7.2.3 /opt/app-root/lib/sda_flex
 
+rm -rf /tmp/libneurosim* /tmp/nest* /tmp/nrn* /tmp/sda_flex.tar.gz /tmp/src
 
 # Fix up permissions.
 fix-permissions /opt/app-root

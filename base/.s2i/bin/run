@@ -3,5 +3,5 @@ set -eo pipefail
 set -x
 
 source /opt/app-root/etc/generate_container_user
-
+export SDAHOME=/opt/app-root/lib/sda_flex
 exec jupyter labhub --NotebookApp.default_url=/lab --config=/opt/app-root/etc/jupyter_notebook_config.py $@
