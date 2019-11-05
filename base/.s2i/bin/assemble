@@ -42,15 +42,15 @@ wget -q -O libneurosim.zip   https://github.com/INCF/libneurosim/archive/${NEURO
 unzip libneurosim.zip
 cd libneurosim-${NEUROSIM_COMMIT}/
 ./autogen.sh
-./configure --prefix=$HOME/.local
+./configure --prefix=/opt/app-root
 make install
 
 cd ..
 wget -q -O nest.tar.gz https://github.com/nest/nest-simulator/archive/v${NEST_VERSION}.tar.gz
 tar xzf nest.tar.gz
 cd nest-simulator-${NEST_VERSION}/
-cmake3 -DCMAKE_INSTALL_PREFIX:PATH=$HOME/.local \
-      -Dwith-libneurosim=$HOME/.local -Dwith-python=3 \
+cmake3 -DCMAKE_INSTALL_PREFIX:PATH=/opt/app-root \
+      -Dwith-libneurosim=/opt/app-root -Dwith-python=3 \
       .
 make install
 
@@ -64,7 +64,7 @@ CC=/usr/lib64/mpich/bin/mpicc ./configure \
                               --with-paranrn=dynamic \
                               --with-readline=yes \
                               --with-nrnpython=dynamic \
-                              --prefix=$HOME/.local/nrn-7.6
+                              --prefix=/opt/app-root
 make -j install
 
 wget -q -O /tmp/sda_flex.tar.gz https://github.com/HumanBrainProject/clb-jupyter-images/raw/external/external/sda_flex-7.2.3.tar.gz
