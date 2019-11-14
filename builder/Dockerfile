@@ -15,6 +15,7 @@ RUN yum install -y epel-release && \
         bzip2-devel \
         cmake \
         cmake3 \
+        csh \
         curl \
         Cython \
         freetype-devel \
@@ -46,24 +47,5 @@ RUN CC=/usr/lib64/mpich/bin/mpicc pip install mpi4py==3.0.2
 ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
 
 EXPOSE 8080
-
-# TODO
-
-# Install ffmpeg/libav
-
-# Build SDA FLEX
-#ADD external/minimal-sda_flex-7.2.2.tar.gz /opt
-#RUN cd /opt/minimal-sda_flex-7.2.2/src && make
-
-# COPY install_scripts/install_amber.sh /tmp/
-# RUN bash /tmp/install_amber.sh
-
-# ENV PYTHONPATH /home/jovyan/.local/nrn/lib/python:$PYTHONPATH
-# ENV AMBERHOME /opt/amber18
-# ENV SDAHOME /opt/minimal-sda_flex-7.2.2
-# RUN sed -ie '\|^{|a \ "env":{"PYTHONPATH":"'$AMBERHOME'/lib/python3.6/site-packages/:'$PYTHONPATH'"},' /opt/conda/share/jupyter/kernels/python3/kernel.json && \
-#     sed -ie '\|^{|a \ "env":{"PYTHONPATH":"'$AMBERHOME'/lib/python2.7/site-packages/:'$PYTHONPATH'"},' /usr/local/share/jupyter/kernels/python2/kernel.json
-# # Switch back to jovyan to avoid accidental container runs as root
-# USER $NB_USER
 
 USER 1000
