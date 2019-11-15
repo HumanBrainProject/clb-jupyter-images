@@ -14,4 +14,7 @@ RUN  /tmp/install_neuron.sh
 COPY install_sda_flex.sh /tmp/
 RUN /tmp/install_sda_flex.sh
 
+USER 0
 RUN rm -f /tmp/install*
+
+USER 1000
