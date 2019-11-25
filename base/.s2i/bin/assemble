@@ -3,6 +3,9 @@
 set -eo pipefail
 set -x
 
+export GIT_COMMITTER_NAME=platform@humanbrainproject.eu
+export GIT_COMMITTER_EMAIL=platform@humanbrainproject.eu
+
 mkdir -p /opt/app-root/etc /opt/app-root/clb/
 mv /tmp/src/jupyter_notebook_config.py /opt/app-root/etc/
 ln -s /mnt/user/drive /opt/app-root/src/drive
