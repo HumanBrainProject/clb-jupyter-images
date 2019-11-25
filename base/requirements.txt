@@ -12,7 +12,7 @@ lazyarray==0.3.3
 lxml==4.4.1
 matplotlib==3.1.1
 nbdime==1.1.0
-nbgitpuller==0.7.2
+nbgitpuller==0.8.0
 neo==0.8.0
 neurom==1.4.14
 nglview==2.7.1
