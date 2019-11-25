@@ -33,6 +33,9 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.0 \
 
 
 jupyter lab build
+jupyter notebook --generate-config
+
+mkdir -p /opt/app-root/src/.ipython/profile_default/startup/
 
 echo 'from clb_nb_utils import oauth as clb_oauth' >> /opt/app-root/src/.ipython/profile_default/startup/50-clb-nb-utils.py
 
