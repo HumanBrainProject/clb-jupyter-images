@@ -36,3 +36,4 @@ sympy==1.4
 vincent==0.4.4
 widgetsnbextension==3.5.1
 xlrd==1.2.0
+git+https://github.com/HumanBrainProject/clb-nb-utils.git
