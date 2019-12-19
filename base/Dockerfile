@@ -84,7 +84,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
         /opt/conda/bin/conda config --system --prepend channels conda-forge && \
         /opt/conda/bin/conda config --system --set auto_update_conda false && \
         /opt/conda/bin/conda config --system --set show_channel_urls true && \
-        /opt/conda/bin/conda create --yes -n nbserver --file /tmp/requirements.conda.txt python=3.8 && \
+        /opt/conda/bin/conda create --yes -n nbserver --file /tmp/requirements.conda.txt python=$PYTHON_VERSION && \
         /opt/conda/bin/conda init && \
         /opt/conda/bin/conda clean -tipsy && \
         echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
