@@ -1,4 +1,4 @@
-bluepyopt==1.8.68
+bluepyopt==1.9.3
 elephant==0.6.4
 lazyarray==0.3.3
 neo==0.8.0

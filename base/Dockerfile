@@ -7,12 +7,11 @@ USER root
 
 ENV LC_ALL en_US.UTF-8
 ENV LANG C.UTF-8
-ENV GPG_KEY E3FF2839C048B25C084DEBE9B26995E310250568
-ENV PYTHON_VERSION 3.8.0
 
 ARG NB_USER="jovyan"
 ARG NB_UID="1000"
 ARG NB_GID="1000"
+ENV NB_USER="$NB_USER"
 
 ARG JUPYTER_HOME="/usr/local/jupyter"
 ARG JUPYTER_ENV_HOME="$JUPYTER_HOME/environments"
@@ -56,6 +55,8 @@ RUN dnf install -y 'dnf-command(config-manager)' && \
         wget \
         && dnf -y clean all
 
+ENV PYTHON_VERSION 3.7.6
+
 # Set the Switzerland timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
@@ -67,7 +68,7 @@ RUN groupadd -g $NB_GID $NB_USER && \
 RUN mkdir /opt/conda && chown $NB_UID:$NB_GID /opt/conda && \
    ln -sf /opt/conda/etc/profile.d/conda.sh /etc/profile.d/conda.sh
 
-USER $NB_USER
+USER $NB_UID
 
 ARG CONDA_VERSION=4.7.12.1
 ARG CONDA_INSTALLER_SHASUM=bfe34e1fa28d6d75a7ad05fd02fa5472275673d5f5621b77380898dee1be15d2
