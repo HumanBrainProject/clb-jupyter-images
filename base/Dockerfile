@@ -75,7 +75,7 @@ ARG CONDA_INSTALLER_SHASUM=bfe34e1fa28d6d75a7ad05fd02fa5472275673d5f5621b7738089
 
 WORKDIR /tmp/
 
-COPY requirements.*.txt /tmp
+COPY requirements.*.txt /tmp/
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
         echo $CONDA_INSTALLER_SHASUM  miniconda.sh | sha256sum -c && \
@@ -92,7 +92,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
 
 
 COPY install_packages.sh /tmp
-RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh
+RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh /tmp/requirements*.txt
 
 WORKDIR /home/$NB_USER
 
