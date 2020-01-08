@@ -92,8 +92,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
 
 
 COPY install_packages.sh /tmp
-RUN /tmp/install_packages.sh && rm /tmp/install_packages.sh /tmp/requirements*.txt
+RUN /tmp/install_packages.sh
 
+USER root
+RUN rm -f /tmp/install_packages.sh /tmp/requirements*.txt
+
+USER $NB_UID
 WORKDIR /home/$NB_USER
 
 # @TODO Remove this when bug is fixed: https://github.com/ipython/ipython/issues/11546

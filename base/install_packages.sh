@@ -5,8 +5,6 @@ set -ex
 conda activate nbserver
 pip install --no-cache-dir -r /tmp/requirements.pip.txt
 pip install --no-cache-dir -r /tmp/requirements.tvb.txt
-rm /tmp/requirements.*.txt
-rm -rf $XDG_CACHE_HOME/*
 
 jupyter labextension install \
         @jupyter-widgets/jupyterlab-manager \
