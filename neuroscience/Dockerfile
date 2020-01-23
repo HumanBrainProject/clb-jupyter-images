@@ -1,15 +1,13 @@
-FROM clb-jupyter-nb-builder:latest
+ENV CLB_NB_BASE_VERSION:v0.0.2-icp-base
+FROM ebrains/clb-jupyter-nb:$CLB_NB_BASE_VERSION
 
-RUN mkdir /opt/app-root/clb
-ENV SDAHOME /opt/app-root/lib/sda_flex
-ENV NEURONHOME /opt/app-root/clb/nrn
-ENV NESTHOME /opt/app-root/clb/nest/
+ENV SDAHOME /usr/local/lib/sda_flex
+ENV NESTHOME /usr/local/lib/nest/
+
+RUN yum install -y https://neuron.yale.edu/ftp/neuron/versions/v7.7/nrn-7.7.x86_64-linux.rpm
 
 COPY install_nest.sh /tmp/
 RUN /tmp/install_nest.sh
-
-COPY install_neuron.sh /tmp/
-RUN  /tmp/install_neuron.sh
 
 COPY install_sda_flex.sh /tmp/
 RUN /tmp/install_sda_flex.sh
