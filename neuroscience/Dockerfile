@@ -1,6 +1,10 @@
 FROM clb-jupyter-nb-builder:latest
 
-RUN yum install -y https://neuron.yale.edu/ftp/neuron/versions/v7.7/nrn-7.7.x86_64-linux.rpm
+USER 0
+RUN yum install -y https://neuron.yale.edu/ftp/neuron/versions/v7.7/nrn-7.7.x86_64-linux.rpm \
+        && yum -y clean all
+
+USER 1000
 ENV SDAHOME /opt/app-root/lib/sda_flex
 ENV NESTHOME /opt/app-root/lib/nest/
 
