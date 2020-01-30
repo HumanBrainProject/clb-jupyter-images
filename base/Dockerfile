@@ -1,5 +1,6 @@
 ARG CENTOS_TAG=8
-FROM centos:$CENTOS_TAG
+ARG CLB_NB_VERSION=0.0.3-icp
+FROM centos:$CENTOS_TAG as ebrains/clb_nb_base:$CLB_NV_VERSION
 
 MAINTAINER Collaboratory Platform <platform@humanbrainproject.eu>
 
@@ -75,7 +76,7 @@ ARG CONDA_INSTALLER_SHASUM=bfe34e1fa28d6d75a7ad05fd02fa5472275673d5f5621b7738089
 
 WORKDIR /tmp/
 
-COPY requirements.*.txt /tmp/
+COPY requirements.conda.txt /tmp/
 
 RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}-Linux-x86_64.sh -O miniconda.sh && \
         echo $CONDA_INSTALLER_SHASUM  miniconda.sh | sha256sum -c && \
@@ -90,11 +91,12 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
         /opt/conda/bin/conda clean -tipsy && \
         echo ". /opt/conda/etc/profile.d/conda.sh" >> ~/.bashrc
 
+ENV PATH /opt/conda/bin:$PATH
 
-COPY install_packages.sh /tmp
+COPY install_packages.sh requirements.pip.txt requirements.tvb.txt /tmp
 RUN /tmp/install_packages.sh
 
-USER root
+USER 0
 RUN rm -f /tmp/install_packages.sh /tmp/requirements*.txt
 
 USER $NB_UID
@@ -103,5 +105,24 @@ WORKDIR /home/$NB_USER
 # @TODO Remove this when bug is fixed: https://github.com/ipython/ipython/issues/11546
 RUN echo 'c.Completer.use_jedi = False' >> ~/.ipython/profile_default/ipython_config.py
 
-
 EXPOSE 8080
+ENTRYPOINT ['/opt/conda/bin/conda', 'run', '-n', 'nbserver']
+
+FROM ebrains/clb_nb_base:$CLB_NB_VERSION as clb_nb_neuro:$CLB_NB_VERSION
+
+USER $NB_UID
+RUN  /opt/conda/bin/conda install -n nbserver -c conda-forge neuron
+
+USER 0
+ENV SDAHOME /usr/local/lib/sda_flex
+ENV NESTHOME /usr/local/lib/nest
+
+COPY install_nest.sh /tmp/
+RUN /tmp/install_nest.sh
+
+COPY install_sda_flex.sh /tmp/
+RUN /tmp/install_sda_flex.sh
+
+RUN rm -f /tmp/install*
+
+USER 1000
