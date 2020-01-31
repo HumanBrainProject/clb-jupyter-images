@@ -1,6 +1,7 @@
 ARG CENTOS_TAG=8
-ARG CLB_NB_VERSION=0.0.3-icp
-FROM centos:$CENTOS_TAG as ebrains/clb_nb_base:$CLB_NV_VERSION
+
+FROM centos:$CENTOS_TAG
+ENV CLB_NB_VERSION=0.0.4-icp
 
 MAINTAINER Collaboratory Platform <platform@humanbrainproject.eu>
 
@@ -93,7 +94,7 @@ RUN wget --quiet https://repo.anaconda.com/miniconda/Miniconda3-${CONDA_VERSION}
 
 ENV PATH /opt/conda/bin:$PATH
 
-COPY install_packages.sh requirements.pip.txt requirements.tvb.txt /tmp
+COPY install_packages.sh requirements.pip.txt requirements.tvb.txt /tmp/
 RUN /tmp/install_packages.sh
 
 USER 0
@@ -107,8 +108,6 @@ RUN echo 'c.Completer.use_jedi = False' >> ~/.ipython/profile_default/ipython_co
 
 EXPOSE 8080
 ENTRYPOINT ['/opt/conda/bin/conda', 'run', '-n', 'nbserver']
-
-FROM ebrains/clb_nb_base:$CLB_NB_VERSION as clb_nb_neuro:$CLB_NB_VERSION
 
 USER $NB_UID
 RUN  /opt/conda/bin/conda install -n nbserver -c conda-forge neuron
