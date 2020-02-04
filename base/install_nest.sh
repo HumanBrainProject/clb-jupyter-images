@@ -2,10 +2,10 @@
 set -eo pipefail
 
 cd /tmp
-(
+# run without privileges
+setpriv --reuid=$NB_UID --regid=$NB_GID --clear-groups bash <<EOF
+
     set -eo pipefail
-    # run without privileges
-    setpriv --reuid=$NB_UID --regid=$NB_GID --clear-groups
 
     # Install libneurosim as a dependency of nest and nest
     NEUROSIM_COMMIT=03646747c8fe64fa3439ac2d282623b659f60c22
@@ -25,7 +25,7 @@ cd /tmp
     cmake3 -DCMAKE_INSTALL_PREFIX:PATH=$NESTHOME \
            -Dwith-libneurosim=/usr/local -Dwith-python=3 \
            .
-)
+EOF
 
 cd /tmp/libneurosim-${NEUROSIM_COMMIT}
 make install
