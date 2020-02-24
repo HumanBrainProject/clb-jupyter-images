@@ -1,2 +1,2 @@
 gdist==1.0.3
-tvb-library==1.5.9
+tvb-library==2.0
