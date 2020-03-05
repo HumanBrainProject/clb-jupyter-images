@@ -42,7 +42,7 @@ RUN yum install -y epel-release && \
 # Set the Switzerland timezone
 RUN ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
-RUN CC=/usr/lib64/mpich/bin/mpicc pip install mpi4py==3.0.2
+ENV MPICC=/usr/lib64/mpich/bin/mpicc
 
 ENV XDG_CACHE_HOME /home/$NB_USER/.cache/
 
