@@ -3,7 +3,7 @@ FROM clb-jupyter-nb-builder:latest
 ENV SDAHOME /opt/app-root/lib/sda_flex
 ENV NEURONHOME /opt/app-root/lib/nrn
 ENV NESTHOME /opt/app-root/lib/nest/
-ENV PYTHONPATH $NEURONHOME/lib/python:$PYTHONPATH
+ENV PYTHONPATH $NEURONHOME/lib64/python:$PYTHONPATH
 ENV PATH $NEURONHOME/x86_64/bin:$PATH
 
 COPY install_nest.sh /tmp/
