@@ -12,7 +12,7 @@ wget -q -O libneurosim.zip   https://github.com/INCF/libneurosim/archive/${NEURO
 unzip libneurosim.zip
 cd libneurosim-${NEUROSIM_COMMIT}/
 ./autogen.sh
-./configure --prefix=/opt/app-root/clb/libneurosim
+./configure --prefix=/opt/app-root/lib/libneurosim
 make install
 
 cd ..

@@ -26,7 +26,7 @@ jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
 
 # Also activate ipywidgets/bokeh extension for JupyterLab.
 jupyter labextension install @jupyter-widgets/jupyterlab-manager \
-                             jupyterlab_bokeh \
+                             @bokeh/jupyter_bokeh \
                              @krassowski/jupyterlab_go_to_definition \
                              jupyterlab-topbar-extension \
                              jupyterlab-system-monitor
