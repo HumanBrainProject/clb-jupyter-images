@@ -26,12 +26,12 @@ jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
         jupyter nbextension enable --py nglview --sys-prefix
 
 # Also activate ipywidgets/bokeh extension for JupyterLab.
-jupyter labextension install @jupyter-widgets/jupyterlab-manager \
-                             @bokeh/jupyter_bokeh \
-                             @krassowski/jupyterlab_go_to_definition \
-                             jupyterlab-topbar-extension \
-                             jupyterlab-system-monitor
-jupyter labextension install jupyter-matplotlib
+# jupyter labextension install @jupyter-widgets/jupyterlab-manager \
+#                             @bokeh/jupyter_bokeh \
+#                             @krassowski/jupyterlab_go_to_definition \
+#                             jupyterlab-topbar-extension \
+#                             jupyterlab-system-monitor
+# jupyter labextension install jupyter-matplotlib
 
 
 jupyter lab build
