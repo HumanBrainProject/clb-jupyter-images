@@ -30,7 +30,8 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1.0 \
                              @bokeh/jupyter_bokeh@1.2.0 \
                              @krassowski/jupyterlab_go_to_definition@0.7.1 \
                              jupyterlab-topbar-extension@0.4.0 \
-                             jupyterlab-system-monitor@0.4.1
+                             jupyterlab-system-monitor@0.4.1 \
+                             jupyterlab-plotly@4.14.3
 jupyter labextension install jupyter-matplotlib@0.7.2
 
 
