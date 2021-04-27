@@ -25,13 +25,16 @@ rm -f /opt/app-root/src/requirements.tvb.txt /opt/app-root/src/requirements.txt
 jupyter nbextension enable --py widgetsnbextension --sys-prefix && \
         jupyter nbextension enable --py nglview --sys-prefix
 
+jupyter labextension disable @jupyterlab/filebrowser-extension:share-file
+
 # Also activate ipywidgets/bokeh extension for JupyterLab.
 jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1.0 \
                              @bokeh/jupyter_bokeh@1.2.0 \
                              @krassowski/jupyterlab_go_to_definition@0.7.1 \
                              jupyterlab-topbar-extension@0.4.0 \
                              jupyterlab-system-monitor@0.4.1 \
-                             jupyterlab-plotly@4.14.3
+                             jupyterlab-plotly@4.14.3 \
+                             clb-jupyter-ext-copy-shareable-link@1.0.0
 jupyter labextension install jupyter-matplotlib@0.7.2
 
 
