@@ -9,8 +9,9 @@ ENV PATH $NEURONHOME/x86_64/bin:$PATH
 COPY install_nest.sh /tmp/
 RUN /tmp/install_nest.sh
 
-COPY install_neuron.sh /tmp/
-RUN  /tmp/install_neuron.sh
+# install NEURON via pip in base img instead
+# COPY install_neuron.sh /tmp/
+# RUN  /tmp/install_neuron.sh
 
 COPY install_sda_flex.sh /tmp/
 RUN /tmp/install_sda_flex.sh
