@@ -32,6 +32,7 @@ RUN yum install -y epel-release && \
         ncurses-devel \
         pandoc \
         python-devel \
+        R \
         readline-devel \
         texlive-latex \
         unzip \

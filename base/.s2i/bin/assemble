@@ -11,6 +11,9 @@ mv /tmp/src/jupyter_notebook_config.py /opt/app-root/etc/
 ln -s /mnt/user/drive /opt/app-root/src/drive
 ln -s /mnt/user/shared /opt/app-root/src/shared
 
+# needs to be installed before rpy2
+pip install cffi==1.14.5
+
 # Execute original assemble script.
 /usr/libexec/s2i/assemble
 
