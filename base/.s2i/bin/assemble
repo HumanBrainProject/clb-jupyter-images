@@ -39,7 +39,7 @@ jupyter labextension install @jupyter-widgets/jupyterlab-manager@1.1.0 \
                              jupyterlab-plotly@4.14.3 \
                              clb-jupyter-ext-copy-shareable-link@1.0.0 \
                              clb-jupyter-ext-query-params@1.0.1
-jupyter labextension install jupyter-matplotlib@0.7.2
+jupyter labextension install jupyter-matplotlib@0.7.4
 
 
 jupyter lab build
