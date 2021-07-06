@@ -45,6 +45,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Zurich /etc/localtime
 
 ENV MPICC=/usr/lib64/mpich/bin/mpicc
 
+RUN mkdir -p /tmp/cache/
 ENV XDG_CACHE_HOME=/tmp/cache
 
 EXPOSE 8080
