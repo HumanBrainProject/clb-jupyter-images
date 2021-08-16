@@ -3,6 +3,7 @@ FROM centos/python-36-centos7
 MAINTAINER Collaboratory Platform <platform@humanbrainproject.eu>
 
 ENV UPGRADE_PIP_TO_LATEST=1 ENABLE_INIT_WRAPPER=1
+ENV LAB_IMAGE_NAME=EBRAINS_OFFICIAL
 
 USER root
 
