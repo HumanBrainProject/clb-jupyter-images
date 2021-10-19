@@ -14,7 +14,7 @@ lxml==4.5.0
 matplotlib==3.3.1
 mpi4py==3.0.3
 nbdime==1.1.0
-nbgitpuller==0.9.0
+nbgitpuller==0.10.2
 nbresuse==0.3.3
 neo==0.8.0
 neurom==1.4.14
