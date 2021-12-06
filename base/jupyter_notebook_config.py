@@ -7,6 +7,9 @@ c.NotebookApp.port = port
 c.NotebookApp.open_browser = False
 c.NotebookApp.quit_button = False
 
+c.PDFExporter.enabled = False
+c.WebPDFExporter.enabled = False
+
 if os.environ.get('JUPYTERHUB_SERVICE_PREFIX'):
     c.NotebookApp.base_url = os.environ.get('JUPYTERHUB_SERVICE_PREFIX')
 
