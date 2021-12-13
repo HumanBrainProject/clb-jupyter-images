@@ -10,7 +10,7 @@ jupyterhub==1.1.0
 jupyterlab==1.2.6
 jupyterlab-git==0.9.0
 lazyarray==0.3.3
-lxml==4.5.0
+lxml==4.6.5
 matplotlib==3.3.1
 mpi4py==3.0.3
 nbdime==1.1.0
